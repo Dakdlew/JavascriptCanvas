@@ -3,19 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Canvas Example</title>
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
 	<style type="text/css">
 		canvas{
 			border: 1px solid black;
+
 		}
-		
-		
 
 	</style>
 
 
 </head>
 <body>
-	<canvas id="canvas" width="500" height="500">
+	<canvas id="canvas" width="0" height="0">
   An alternative text describing what your canvas displays. 
 </canvas>
 
@@ -30,9 +30,8 @@
 	var mousey = 0;
 	var color = ColorPicker.value;
 	var radius = 20;
-	//var Cwidth = canvas.width;
-	//var Cheight = canvas.height;
-	console.log()
+	ctx.canvas.width = window.innerWidth * 0.8;
+	ctx.canvas.height = window.innerHeight * 0.8;
 
 	function draw(){
 		ctx.beginPath();
@@ -47,8 +46,13 @@
 
 		draw();
 
-	
+	})
+	document.addEventListener("touchmove" , function(e){
+		mousex = e.changedTouches[0].pageX
+		mousey = e.changedTouches[0].pageY
+		color = ColorPicker.value;
 
+		draw();
 	})
 
 	window.addEventListener("keydown" , function(e){
