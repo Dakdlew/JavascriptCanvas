@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Example</title>
+	<style type="text/css">
+		canvas{
+			border: 1px solid black;
+		}
+		
+		
+
+	</style>
+
+
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500">
+  An alternative text describing what your canvas displays. 
+</canvas>
+
+<input id = "colpicker" type="color" value="#EE00CC">
+
+<script>
+	//Rectangles
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
+	var ColorPicker = document.querySelector('#colpicker');
+	var mousex = 0;
+	var mousey = 0;
+	var color = ColorPicker.value;
+	var radius = 20;
+	//var Cwidth = canvas.width;
+	//var Cheight = canvas.height;
+	console.log()
+
+	function draw(){
+		ctx.beginPath();
+		ctx.fillStyle = color;
+		ctx.arc(mousex,mousey,radius,0,2*Math.PI);
+		ctx.fill();
+	}
+	window.addEventListener("mousemove" , function(e){
+		mousex = e.pageX;
+		mousey = e.pageY;
+		color = ColorPicker.value;
+
+		draw();
+
+	
+
+	})
+
+	window.addEventListener("keydown" , function(e){
+		console.log(e.key);
+		if (e.key == "r"|"R"){
+			color = "#FF0000";
+			ColorPicker.value = color;
+		}
+		else if(e.key == "b"|"B"){
+			color = "#0000FF";
+			ColorPicker.value = color;
+		}
+		else if(e.key == "y"|"Y"){
+			color = "#FFFF02";
+			ColorPicker.value = color;
+		}
+		else if(e.key == "g"|"G"){
+			color = "#008000";
+			ColorPicker.value = color;
+		}
+		else if(e.key == "p"|"P"){
+			color = "#800180";
+			ColorPicker.value = color;
+		}
+
+		else if(e.key == "o"|"O"){
+			color = "#FFA500";
+			ColorPicker.value = color;
+		}
+		else if(e.key == "ArrowUp"){
+			radius = radius+5;
+		}
+		else if(e.key == "ArrowDown"){
+			radius = radius-5;
+			if(radius <= 5){
+				radius = 1;
+			}
+		}
+		else if(e.keyCode == "32"){
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			draw();
+		}
+		else{
+			color = "black"
+		}
+	})
+
+
+</script>
+
+</body>
+</html>
