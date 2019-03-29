@@ -12,9 +12,12 @@
 
 	</style>
 
+	<script>
+	</script>
+
 
 </head>
-<body>
+<body onload="refresh()">
 	<canvas id="canvas" width="0" height="0">
   An alternative text describing what your canvas displays. 
 </canvas>
@@ -30,8 +33,13 @@
 	var mousey = 0;
 	var color = ColorPicker.value;
 	var radius = 20;
-	ctx.canvas.width = window.innerWidth * 0.8;
-	ctx.canvas.height = window.innerHeight * 0.8;
+	
+
+	function refresh(){
+		ctx.canvas.width = window.innerWidth * 0.8;
+		ctx.canvas.height = window.innerHeight * 0.8;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
 
 	function draw(){
 		ctx.beginPath();
@@ -99,6 +107,10 @@
 			color = "black"
 		}
 	})
+
+	if(window.innerHeight > window.innerWidth){
+		refresh()
+	}
 
 
 </script>
