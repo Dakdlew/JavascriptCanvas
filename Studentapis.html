@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>API Lecture</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 	<script src = "js/apis.js"></script>
+ --></head>
+<body>
+	<h1>API lecture</h1>
+	<section>
+		<h2>Twitter</h2>
+
+		<!-- Select here to avoid Twitter feed -->
+		<a class="accessibility-link" href="#afterTwitterTimeline">Skip twitter timeline</a>
+		
+		<div>
+          	<h3>Twitter Feeds</h3>
+			<a class="twitter-timeline"  href="https://twitter.com/umsi?ref_src=twsrc%5Etfw"
+			data-width="55%" data-height="45vh">Tweets by umsi</a> 
+			
+			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+		</div>
+		<span id="afterTwitterTimeline" tabindex="0" title="End of twitter feed" aria-label="End of twitter timeline"></span>
+	</section>
+
+	
+
+	<section>
+		  <h2>Google Maps </h2>
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap(lt, lg) {
+  // The location of Uluru
+  var uluru = {lat:  , lng: -80.791496834};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap">
+    </script>
+	</section>
+
+
+	<section>
+		<h2>NASA</h2>
+		    <b>API URL:</b>
+		  <pre id="reqObject"></pre>
+		  
+		  
+		  <img id="apod_img_id" width="250px"/>
+		  
+		  <iframe id="apod_vid_id" type="text/html" width="640" height="385" frameborder="0"></iframe>
+		  <p id="copyright"></p>
+		  
+		  <h3 id="apod_title"></h3>
+		  <p id="apod_explaination"></p>
+		  <br/>
+		  <b>Return Object:</b>
+		  <pre id="returnObject"></pre>
+        </div>
+
+         <script>
+			var url = "https://api.nasa.gov/planetary/apod?api_key=YOUR_KEY";
+
+
+		$.ajax({
+		  url: url,
+		  success: function(result){
+		  if("copyright" in result) {
+		    $("#copyright").text("Image Credits: " + result.copyright);
+		  }
+		  else {
+		    $("#copyright").text("Image Credits: " + "Public Domain");
+		  }
+		  
+		  if(result.media_type == "video") {
+		    $("#apod_img_id").css("display", "none"); 
+		    $("#apod_vid_id").attr("src", result.url);
+		  }
+		  else {
+		    $("#apod_vid_id").css("display", "none"); 
+		    $("#apod_img_id").attr("src", result.url);
+		  }
+		  $("#reqObject").text(url);
+		  $("#returnObject").text(JSON.stringify(result, null, 4));  
+		  $("#apod_explaination").text(result.explanation);
+		  $("#apod_title").text(result.title);
+		}
+		});
+
+
+		</script>
+	</section>
+	
+</body>
+</html>
