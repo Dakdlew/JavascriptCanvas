@@ -11,7 +11,7 @@
 		}
 		input{
 			display: block;
-			margin:2em;
+			margin:1em;
 		}
         
 
@@ -27,8 +27,8 @@
   An alternative text describing what your canvas displays. 
 </canvas>
 
-<input id = "colpicker" type="color" value="#EE00CC">
-
+<label><input id = "colpicker" type="color" value="#EE00CC">
+Pick your color!</label>
 <script>
 	//Rectangles
 	var canvas = document.querySelector('canvas');
@@ -77,6 +77,26 @@
 	window.addEventListener("keydown" , function(e){
 		//3. Alternate the pen colors by hitting the pressing the "b" for blue, the "g" for green, the "r" for red, and the "y" for yellow.
 
+	window.blockMenuHeaderScroll = false;
+
+$(window).on('touchstart', function(e)
+{
+    if ($(e.target).closest('#mobileMenuHeader').length == 1)
+    {
+        blockMenuHeaderScroll = true;
+    }
+});
+$(window).on('touchend', function()
+{
+    blockMenuHeaderScroll = false;
+});
+$(window).on('touchmove', function(e)
+{
+    if (blockMenuHeaderScroll)
+    {
+        e.preventDefault();
+    }
+});
 
 		console.log(e.key);
 		if (e.key == "r"|"R"){
