@@ -17,18 +17,19 @@
 
 	</style>
 
-	<script>
-	</script>
+	
 
 
 </head>
 <body onload="refresh()" onresize="refresh()">
+	<main>
 	<canvas id="canvas" width="0" height="0">
-  An alternative text describing what your canvas displays. 
+  <h1>An alternative text describing what your canvas displays. </h1>
 </canvas>
 
 <label><input id = "colpicker" type="color" value="#EE00CC">
 Pick your color!</label>
+</main>
 <script>
 	//Rectangles
 	var canvas = document.querySelector('canvas');
@@ -41,8 +42,8 @@ Pick your color!</label>
 	var radius = 20;
 	function refresh(){
 		//1.  Create a canvas element with a border. The canvas should be about 80% the width and 80% height of the screen. If the window is dynamically resized, you do not need to resize the canvas, but if I use Inspect element to switch to different device size it should.
-		ctx.canvas.width = window.innerWidth * 0.9;
-		ctx.canvas.height = window.innerHeight * 0.9;
+		ctx.canvas.width = window.innerWidth * 0.8;
+		ctx.canvas.height = window.innerHeight * 0.75;
 
 		//7. On a mobile device changing the orientation should clear and resize the canvas. This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
 
@@ -77,26 +78,6 @@ Pick your color!</label>
 	window.addEventListener("keydown" , function(e){
 		//3. Alternate the pen colors by hitting the pressing the "b" for blue, the "g" for green, the "r" for red, and the "y" for yellow.
 
-	window.blockMenuHeaderScroll = false;
-
-$(window).on('touchstart', function(e)
-{
-    if ($(e.target).closest('#mobileMenuHeader').length == 1)
-    {
-        blockMenuHeaderScroll = true;
-    }
-});
-$(window).on('touchend', function()
-{
-    blockMenuHeaderScroll = false;
-});
-$(window).on('touchmove', function(e)
-{
-    if (blockMenuHeaderScroll)
-    {
-        e.preventDefault();
-    }
-});
 
 		console.log(e.key);
 		if (e.key == "r"|"R"){
@@ -147,6 +128,28 @@ $(window).on('touchmove', function(e)
 
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	window.blockMenuHeaderScroll = false;
+$(window).on('touchstart', function(e)
+{
+    if ($(e.target).closest('#mobileMenuHeader').length == 1)
+    {
+        blockMenuHeaderScroll = true;
+    }
+});
+$(window).on('touchend', function()
+{
+    blockMenuHeaderScroll = false;
+});
+$(window).on('touchmove', function(e)
+{
+    if (blockMenuHeaderScroll)
+    {
+        e.preventDefault();
+    }
+});
+	</script>
+
 
 </body>
 </html>
